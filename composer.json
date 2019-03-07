@@ -1,5 +1,5 @@
 {
-  "name": "cyberhouse/typo3-doctrine-orm",
+  "name": "fischer-simon/typo3-doctrine-orm",
   "description": "Provides Extbase integration for Doctrine ORM for TYPO3 8+",
   "type": "typo3-cms-extension",
   "license": "GPL-3.0-only",
@@ -7,6 +7,10 @@
     {
       "name": "Georg Großberger",
       "email": "georg.grossberger@cyberhouse.at"
+    },
+    {
+      "name": "Simon Fischer",
+      "email": "mail@simonfischer.info"
     }
   ],
   "config": {
