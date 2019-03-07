@@ -11,9 +11,11 @@ namespace Cyberhouse\DoctrineORM\Utility;
  * <https://www.gnu.org/licenses/gpl-3.0.html>
  */
 
+use Cyberhouse\DoctrineORM\DBAL\FirstFunction;
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\ORM\Cache;
+use Doctrine\Common\Cache\Cache;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -98,9 +100,19 @@ class EntityManagerFactory implements SingletonInterface
                 false
             );
 
+            try {
+                $config->addCustomStringFunction('FIRST', FirstFunction::class);
+            } catch (ORMException $e) {
+                // Noop, ignore
+            }
+
             $connection = $this->objectManager->get(ConnectionPool::class)->getConnectionForTable($extKey);
 
-            $this->known[$extKey] = EntityManager::create($connection, $config);
+            try {
+                $this->known[$extKey] = EntityManager::create($connection, $config);
+            } catch (ORMException $e) {
+                $this->known[$extKey] = null;
+            }
         }
 
         return $this->known[$extKey];
