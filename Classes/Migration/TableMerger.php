@@ -55,9 +55,7 @@ class TableMerger
         /** @var Table $table */
         foreach ([$this->base, $additional] as $table) {
             foreach ($table->getColumns() as $column) {
-                if (!isset($data['columns'][$this->quotes->remove($column->getName())])) {
-                    $data['columns'][$this->quotes->remove($column->getName())] = $column;
-                }
+                $data['columns'][$this->quotes->remove($column->getName())] = $column;
             }
 
             foreach ($table->getIndexes() as $index) {
