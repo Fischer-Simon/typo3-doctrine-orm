@@ -39,7 +39,7 @@
   },
   "require": {
     "php": ">= 7.0",
-    "typo3/cms": "^8.6",
+    "typo3/cms-core": "^9.5",
     "doctrine/orm": "^2.5",
     "doctrine/annotations": "^1.3",
     "beberlei/doctrineextensions": "^1.2"
